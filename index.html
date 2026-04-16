@@ -403,16 +403,22 @@
     const chatInput = document.getElementById("chatInput");
     const chatSend = document.getElementById("chatSend");
     const quickPrompts = document.querySelectorAll(".quick-prompt");
-    const API_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:5000";
-    const fetchData = async () => {
-  try {
-    const response = await fetch(`${API_URL}/api/data`);
-    const data = await response.json();
-    console.log(data);
-  } catch (error) {
-    console.error("Connection failed:", error);
-  }
-};
+    const BACKEND_URL = "https://your-flask-app.up.railway.app";
+
+async function getData() {
+    try {
+        const response = await fetch(`${BACKEND_URL}/api/data`);
+        const data = await response.json();
+        
+        // Inject the data into your HTML
+        document.getElementById("output").innerText = data.message;
+    } catch (error) {
+        console.error("Error connecting to backend:", error);
+    }
+}
+
+// Call the function when the page loads
+getData();
 
     function addMessage(message, role) {
         const messageElement = document.createElement("div");
