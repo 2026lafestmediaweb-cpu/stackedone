@@ -403,11 +403,11 @@
     const chatInput = document.getElementById("chatInput");
     const chatSend = document.getElementById("chatSend");
     const quickPrompts = document.querySelectorAll(".quick-prompt");
-    const BACKEND_URL = "https://your-flask-app.up.railway.app";
+    const API_URL = "https://your-flask-app.up.railway.app";
 
 async function getData() {
     try {
-        const response = await fetch(`${BACKEND_URL}/api/data`);
+        const response = await fetch(`${API_URL}/api/data`);
         const data = await response.json();
         
         // Inject the data into your HTML
