@@ -444,17 +444,19 @@
     }
 
     // 2. Fixed Send Message Logic
-    async function sendMessage() {
+   async function sendMessage() {
         const text = chatInput.value.trim();
         if (!text) return;
 
         addMessage(text, "user");
         chatInput.value = "";
+        
+        // Disable UI
         chatInput.disabled = true;
         chatSend.disabled = true;
+        chatSend.classList.add('opacity-50'); // Visual cue it's working
 
         try {
-            // CRITICAL FIX: Added /chat to the end of the URL
             const response = await fetch(`${API_URL}/chat`, {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
@@ -464,22 +466,22 @@
             const data = await response.json();
             
             if (!response.ok) {
-                throw new Error(data.error || "Failed to fetch chatbot response.");
+                throw new Error(data.error || "Backend Error");
             }
 
-            // Using data.reply because your app.py returns {"reply": ...}
-            addMessage(data.reply || "No response text received.", "assistant");
+            addMessage(data.reply, "assistant");
             
         } catch (error) {
             console.error("Chat Error:", error);
-            addMessage(`Error: ${error.message}`, "assistant");
-        } finally {
-            chatInput.disabled = false;
-            chatSend.disabled = false;
-            chatInput.focus();
-        }
+            addMessage(`Error: Could not reach AI. ${error.message}`, "assistant");
+        } 
+        
+        // This MUST run regardless of success or failure
+        chatInput.disabled = false;
+        chatSend.disabled = false;
+        chatSend.classList.remove('opacity-50');
+        chatInput.focus();
     }
-
     // Event Listeners
     chatSend.addEventListener("click", sendMessage);
     
