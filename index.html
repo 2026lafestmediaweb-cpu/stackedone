@@ -1,0 +1,467 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Ethereal Studio | Student Dashboard</title>
+<!-- Fonts -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&amp;family=Plus+Jakarta+Sans:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<!-- Material Symbols -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-error": "#ffefef",
+                        "on-tertiary": "#e9f4ff",
+                        "on-secondary-fixed-variant": "#6514d6",
+                        "on-tertiary-fixed-variant": "#003d5a",
+                        "on-surface-variant": "#5f557f",
+                        "surface-container-lowest": "#ffffff",
+                        "tertiary": "#00628c",
+                        "on-primary-fixed-variant": "#1a0099",
+                        "tertiary-fixed": "#40bbff",
+                        "error-container": "#f74b6d",
+                        "on-secondary-container": "#5b00c7",
+                        "error": "#b41340",
+                        "on-error-container": "#510017",
+                        "primary-fixed-dim": "#8885ff",
+                        "on-primary-fixed": "#000000",
+                        "on-surface": "#32294f",
+                        "primary-container": "#9795ff",
+                        "inverse-primary": "#8582ff",
+                        "on-primary-container": "#14007e",
+                        "surface-dim": "#dacdff",
+                        "surface-tint": "#4a40e0",
+                        "secondary-fixed": "#dcc9ff",
+                        "inverse-surface": "#10062d",
+                        "surface-container-highest": "#e2d7ff",
+                        "secondary": "#702ae1",
+                        "tertiary-dim": "#00557b",
+                        "surface-container": "#ede4ff",
+                        "surface-bright": "#faf4ff",
+                        "on-background": "#32294f",
+                        "surface-variant": "#e2d7ff",
+                        "outline-variant": "#b2a6d5",
+                        "secondary-dim": "#6411d5",
+                        "background": "#faf4ff",
+                        "tertiary-container": "#40bbff",
+                        "inverse-on-surface": "#a296c4",
+                        "primary": "#4a40e0",
+                        "error-dim": "#a70138",
+                        "surface-container-low": "#f5eeff",
+                        "primary-fixed": "#9795ff",
+                        "primary-dim": "#3d30d4",
+                        "tertiary-fixed-dim": "#25adf1",
+                        "surface": "#faf4ff",
+                        "surface-container-high": "#e8deff",
+                        "on-secondary-fixed": "#430097",
+                        "on-tertiary-container": "#00344d",
+                        "secondary-fixed-dim": "#d0b8ff",
+                        "on-primary": "#f4f1ff",
+                        "secondary-container": "#dcc9ff",
+                        "outline": "#7b719c",
+                        "on-tertiary-fixed": "#001a29",
+                        "on-secondary": "#f8f0ff"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "fontFamily": {
+                        "headline": ["Manrope"],
+                        "body": ["Plus Jakarta Sans"],
+                        "label": ["Plus Jakarta Sans"]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            vertical-align: middle;
+        }
+        body { font-family: 'Plus Jakarta Sans', sans-serif; }
+        h1, h2, h3 { font-family: 'Manrope', sans-serif; }
+        .chart-tooltip {
+            visibility: hidden;
+            position: absolute;
+            z-index: 10;
+        }
+        .bar-container:hover .chart-tooltip {
+            visibility: visible;
+        }
+    </style>
+</head>
+<body class="bg-background text-on-background min-h-screen">
+<!-- TopAppBar (Mobile) -->
+<header class="flex md:hidden items-center justify-between px-6 py-4 w-full z-40 bg-background/80 backdrop-blur-xl sticky top-0 border-b border-outline-variant/10">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-primary">menu</span>
+<span class="text-primary font-extrabold font-headline text-lg">Ethereal Studio</span>
+</div>
+<img alt="User Profile" class="w-8 h-8 rounded-full border-2 border-primary/20" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAhuZe4E0Rbj1I0dZT2KtIbz0XCTeFWNcO8kDB_kDFuc7_ueicyuz6_qSwyeHa782_9hpHposI3Mt4r6Kyy3JyjzFs9EZjDgYxqhZxYejHXQpJKN2GXfLIS0KIPAy3mkgDaYX2_csrTM__nuzL4UDdj1vFlFKuIS1uiHxet0V4orTmoP4To4xEjHJnZnv0ca0t7HklJGoZ1lVGTU7HRIyf4UsFqIq5l_H3TgwcyNtfA3ddvZMkciZ3CbvYYNvki21HB2NXCLTDD4XrD"/>
+</header>
+<!-- NavigationDrawer (Desktop) -->
+<aside class="hidden md:flex flex-col w-72 h-screen p-6 fixed left-0 top-0 bg-surface-container-low backdrop-blur-xl shadow-[8px_0_32px_rgba(50,41,79,0.06)] rounded-r-[2rem] z-50 overflow-y-auto">
+<div class="mb-10 px-2">
+<h1 class="font-headline font-bold text-primary text-2xl tracking-tight">Ethereal Studio</h1>
+</div>
+<nav class="flex-1 space-y-2 mb-10">
+<a class="flex items-center gap-4 px-4 py-3 bg-secondary-container text-on-secondary-container rounded-full transition-all duration-200" href="index.html">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">dashboard</span>
+<span class="text-sm font-semibold tracking-tight">Dashboard</span>
+</a>
+<a class="flex items-center gap-4 px-4 py-3 text-on-surface-variant hover:bg-surface-container-highest rounded-full transition-all duration-200" href="notes.html">
+<span class="material-symbols-outlined">description</span>
+<span class="text-sm font-semibold tracking-tight">Notes</span>
+</a>
+<a class="flex items-center gap-4 px-4 py-3 text-on-surface-variant hover:bg-surface-container-highest rounded-full transition-all duration-200" href="flashcards.html">
+<span class="material-symbols-outlined">style</span>
+<span class="text-sm font-semibold tracking-tight">Flashcards</span>
+</a>
+<a class="flex items-center gap-4 px-4 py-3 text-on-surface-variant hover:bg-surface-container-highest rounded-full transition-all duration-200" href="leaderboard.html">
+<span class="material-symbols-outlined">leaderboard</span>
+<span class="text-sm font-semibold tracking-tight">Leaderboard</span>
+</a>
+<a class="flex items-center gap-4 px-4 py-3 text-on-surface-variant hover:bg-surface-container-highest rounded-full transition-all duration-200" href="feedback.html">
+<span class="material-symbols-outlined">rate_review</span>
+<span class="text-sm font-semibold tracking-tight">Feedback</span>
+</a></nav>
+<div class="mt-auto space-y-4">
+<div class="p-4 bg-primary/10 rounded-2xl">
+<p class="text-[10px] font-bold text-primary mb-1 uppercase tracking-wider">Current Streak</p>
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-secondary" style="font-variation-settings: 'FILL' 1;">local_fire_department</span>
+<span class="text-lg font-bold text-on-surface">12 Days</span>
+</div>
+</div>
+<!-- User Profile Section at bottom -->
+<div class="flex items-center gap-3 p-3 bg-white/50 rounded-2xl border border-outline-variant/10">
+<img alt="Student Profile Picture" class="w-10 h-10 rounded-xl bg-white shadow-sm" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBst-TwNLRytniYjtzexdRJrZJUnq5B4rn9VLgENMFSPYQksY-HrD3hYULcMihqY7ao8hyvDqPzzn9bd68qXrU-yIp69Kdx8viUIrLhWssWYaUWs7FjegGW8unXxFoV-2pqX-mvkK4_kVr6IfmYEhOXVtpgdys1Pwc1XW1gva75hhi38fy8jmd2qlij5kHs68Fz_9TLXGXCo-m7dCf_gRWSa8naDaMRXzLGmUlMKOLwpJR0JXh0AgDd2jRKDdnVAkPWfJLEi4wP9-zX"/>
+<div class="overflow-hidden">
+<p class="text-sm font-bold text-on-surface truncate">Alex Rivers</p>
+<p class="text-[10px] text-on-surface-variant font-medium truncate">Computer Science</p>
+</div>
+<button class="ml-auto text-on-surface-variant hover:text-primary">
+<span class="material-symbols-outlined text-xl">settings</span>
+</button>
+</div>
+</div>
+</aside>
+<!-- Main Content Canvas -->
+<main class="md:ml-72 p-6 md:p-10 pb-32">
+<!-- Header Section -->
+<header class="mb-8">
+<h2 class="text-3xl font-extrabold text-on-surface mb-2">Good morning, Alex.</h2>
+<p class="text-on-surface-variant font-medium text-base">You have <span class="text-primary font-bold">3 assignments</span> due this week. Stay focused.</p>
+</header>
+<!-- Dashboard Grid -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+<!-- Performance Graph (Bento Large) -->
+<section class="lg:col-span-8 bg-surface-container-lowest rounded-[2rem] p-8 shadow-[0_8px_32px_rgba(50,41,79,0.04)]">
+<div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-8">
+<div>
+<h3 class="text-xl font-bold text-on-surface">Performance Graph</h3>
+<p class="text-sm text-on-surface-variant">Average Grade Growth (%)</p>
+</div>
+<div class="flex items-center gap-4">
+<div class="relative inline-block text-left">
+<select class="appearance-none bg-surface-container-low border border-outline-variant/20 rounded-xl px-4 py-2 pr-8 text-xs font-bold text-on-surface focus:outline-none focus:ring-2 focus:ring-primary/20">
+<option>Weekly</option>
+<option>Monthly</option>
+</select>
+<span class="material-symbols-outlined absolute right-2 top-1/2 -translate-y-1/2 text-sm pointer-events-none">expand_more</span>
+</div>
+</div>
+</div>
+<!-- Legend -->
+<div class="flex flex-wrap gap-4 mb-6">
+<div class="flex items-center gap-2">
+<div class="w-2.5 h-2.5 rounded-full bg-primary"></div>
+<span class="text-[11px] font-semibold text-on-surface-variant">Mathematics</span>
+</div>
+<div class="flex items-center gap-2">
+<div class="w-2.5 h-2.5 rounded-full bg-secondary"></div>
+<span class="text-[11px] font-semibold text-on-surface-variant">Science</span>
+</div>
+<div class="flex items-center gap-2">
+<div class="w-2.5 h-2.5 rounded-full bg-tertiary-fixed-dim"></div>
+<span class="text-[11px] font-semibold text-on-surface-variant">English</span>
+</div>
+</div>
+<!-- Chart Area -->
+<div class="relative h-64 w-full flex items-end justify-between px-2">
+<div class="absolute inset-0 flex flex-col justify-between py-2 pointer-events-none">
+<div class="border-b border-outline-variant/10 w-full h-0"></div>
+<div class="border-b border-outline-variant/10 w-full h-0"></div>
+<div class="border-b border-outline-variant/10 w-full h-0"></div>
+<div class="border-b border-outline-variant/10 w-full h-0"></div>
+<div class="border-b border-outline-variant/10 w-full h-0"></div>
+</div>
+<div class="relative w-full h-full flex items-end justify-around">
+<!-- Bar with Tooltip example -->
+<div class="bar-container relative w-8 h-[60%] flex justify-center group">
+<div class="w-full bg-gradient-to-t from-primary/40 to-primary rounded-t-full transition-all group-hover:brightness-110"></div>
+<div class="chart-tooltip bottom-full mb-2 bg-inverse-surface text-inverse-on-surface text-[10px] py-1 px-2 rounded-md shadow-lg whitespace-nowrap">
+                                Math: 60%
+                            </div>
+</div>
+<div class="bar-container relative w-8 h-[85%] flex justify-center group">
+<div class="w-full bg-gradient-to-t from-secondary/40 to-secondary rounded-t-full transition-all group-hover:brightness-110"></div>
+<div class="chart-tooltip bottom-full mb-2 bg-inverse-surface text-inverse-on-surface text-[10px] py-1 px-2 rounded-md shadow-lg whitespace-nowrap">
+                                Science: 85%
+                            </div>
+</div>
+<div class="bar-container relative w-8 h-[70%] flex justify-center group">
+<div class="w-full bg-gradient-to-t from-tertiary-fixed-dim/40 to-tertiary-fixed-dim rounded-t-full transition-all group-hover:brightness-110"></div>
+<div class="chart-tooltip bottom-full mb-2 bg-inverse-surface text-inverse-on-surface text-[10px] py-1 px-2 rounded-md shadow-lg whitespace-nowrap">
+                                English: 70%
+                            </div>
+</div>
+<div class="bar-container relative w-8 h-[75%] flex justify-center group">
+<div class="w-full bg-gradient-to-t from-primary/40 to-primary rounded-t-full transition-all group-hover:brightness-110"></div>
+<div class="chart-tooltip bottom-full mb-2 bg-inverse-surface text-inverse-on-surface text-[10px] py-1 px-2 rounded-md shadow-lg whitespace-nowrap">
+                                Math: 75%
+                            </div>
+</div>
+<div class="bar-container relative w-8 h-[95%] flex justify-center group">
+<div class="w-full bg-gradient-to-t from-secondary/40 to-secondary rounded-t-full transition-all group-hover:brightness-110"></div>
+<div class="chart-tooltip bottom-full mb-2 bg-inverse-surface text-inverse-on-surface text-[10px] py-1 px-2 rounded-md shadow-lg whitespace-nowrap">
+                                Science: 95%
+                            </div>
+</div>
+<div class="bar-container relative w-8 h-[65%] flex justify-center group">
+<div class="w-full bg-gradient-to-t from-tertiary-fixed-dim/40 to-tertiary-fixed-dim rounded-t-full transition-all group-hover:brightness-110"></div>
+<div class="chart-tooltip bottom-full mb-2 bg-inverse-surface text-inverse-on-surface text-[10px] py-1 px-2 rounded-md shadow-lg whitespace-nowrap">
+                                English: 65%
+                            </div>
+</div>
+</div>
+</div>
+<div class="flex justify-around mt-6">
+<span class="text-[10px] font-bold text-outline uppercase tracking-widest">Mon</span>
+<span class="text-[10px] font-bold text-outline uppercase tracking-widest">Tue</span>
+<span class="text-[10px] font-bold text-outline uppercase tracking-widest">Wed</span>
+<span class="text-[10px] font-bold text-outline uppercase tracking-widest">Thu</span>
+<span class="text-[10px] font-bold text-outline uppercase tracking-widest">Fri</span>
+<span class="text-[10px] font-bold text-outline uppercase tracking-widest">Sat</span>
+</div>
+</section>
+<!-- Chatbot Section -->
+<section class="lg:col-span-4 bg-primary rounded-[2rem] p-6 text-on-primary shadow-xl flex flex-col h-[500px] min-h-[500px] max-h-[500px] overflow-hidden">
+<div class="flex items-center gap-3 mb-6">
+<div class="w-10 h-10 bg-white/20 rounded-xl flex items-center justify-center backdrop-blur-md">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">smart_toy</span>
+</div>
+<div>
+<h3 class="font-headline font-bold">Academic Assistant</h3>
+<p class="text-[10px] text-on-primary/70">Powered by Ethereal AI</p>
+</div>
+</div>
+<div class="flex-1 space-y-4 mb-4 overflow-y-auto overflow-x-hidden pr-1 scrollbar-hide" id="chatMessages">
+<div class="bg-white/10 rounded-2xl p-4 text-sm w-fit max-w-[85%] leading-relaxed break-words whitespace-pre-wrap">
+                        How can I help with your Computer Science revision today?
+                    </div>
+</div>
+<div class="space-y-4">
+<!-- Quick Suggestions -->
+<div class="flex flex-wrap gap-2 mb-2">
+<button class="bg-white/15 hover:bg-white/25 transition-colors px-3 py-1.5 rounded-full text-[10px] font-bold border border-white/10 flex items-center gap-1.5 quick-prompt">
+<span class="material-symbols-outlined text-xs">auto_awesome</span> Explain topic
+                        </button>
+<button class="bg-white/15 hover:bg-white/25 transition-colors px-3 py-1.5 rounded-full text-[10px] font-bold border border-white/10 flex items-center gap-1.5 quick-prompt">
+<span class="material-symbols-outlined text-xs">quiz</span> Give quiz
+                        </button>
+<button class="bg-white/15 hover:bg-white/25 transition-colors px-3 py-1.5 rounded-full text-[10px] font-bold border border-white/10 flex items-center gap-1.5 quick-prompt">
+<span class="material-symbols-outlined text-xs">summarize</span> Summary
+                        </button>
+</div>
+<div class="relative">
+<input class="w-full bg-white/10 border-none rounded-2xl py-4 px-5 text-sm placeholder:text-white/50 focus:ring-2 focus:ring-white/30" id="chatInput" placeholder="Ask anything..." type="text"/>
+<button class="absolute right-2 top-2 p-2 bg-white text-primary rounded-xl hover:bg-surface-bright transition-colors shadow-sm" id="chatSend">
+<span class="material-symbols-outlined">send</span>
+</button>
+</div>
+</div>
+</section>
+<!-- Announcements Window -->
+<section class="lg:col-span-6 bg-surface-container-low rounded-[2rem] p-8 shadow-[0_4px_24px_rgba(50,41,79,0.02)]">
+<div class="flex items-center justify-between mb-6">
+<h3 class="text-lg font-bold text-on-surface">Announcements</h3>
+<div class="relative">
+<span class="material-symbols-outlined text-outline">notifications</span>
+<div class="absolute -top-1 -right-1 w-2 h-2 bg-error rounded-full border-2 border-surface-container-low"></div>
+</div>
+</div>
+<div class="space-y-4">
+<div class="p-5 bg-surface-container-lowest rounded-2xl group cursor-pointer hover:shadow-md transition-all border border-transparent hover:border-primary/10">
+<div class="flex justify-between items-start mb-2">
+<h4 class="font-bold text-sm text-on-surface">Spring Term Break</h4>
+<span class="text-[10px] font-semibold text-outline px-2 py-0.5 bg-surface-container-high rounded-full">2h ago</span>
+</div>
+<p class="text-xs text-on-surface-variant leading-relaxed">The university will be closed from March 15th to March 22nd for the annual spring break period.</p>
+</div>
+<div class="p-5 bg-surface-container-lowest rounded-2xl group cursor-pointer hover:shadow-md transition-all border border-transparent hover:border-primary/10">
+<div class="flex justify-between items-start mb-2">
+<h4 class="font-bold text-sm text-on-surface">Library New Hours</h4>
+<span class="text-[10px] font-semibold text-outline px-2 py-0.5 bg-surface-container-high rounded-full">Yesterday</span>
+</div>
+<p class="text-xs text-on-surface-variant leading-relaxed">Starting Monday, the central library will remain open 24/7 for exam preparation.</p>
+</div>
+</div>
+</section>
+<!-- Recently Visited Notes -->
+<section class="lg:col-span-3 bg-surface-container-low rounded-[2rem] p-8 shadow-[0_4px_24px_rgba(50,41,79,0.02)]">
+<div class="flex items-center justify-between mb-6">
+<h3 class="text-lg font-bold text-on-surface">Recent Notes</h3>
+<button class="text-primary text-[10px] font-bold uppercase tracking-widest hover:underline underline-offset-4">View All</button>
+</div>
+<div class="space-y-4">
+<div class="flex items-center gap-4 p-3 hover:bg-surface-container-highest rounded-2xl transition-all cursor-pointer group">
+<div class="w-11 h-11 bg-secondary/10 text-secondary rounded-xl flex items-center justify-center group-hover:bg-secondary/20 transition-colors">
+<span class="material-symbols-outlined">code</span>
+</div>
+<div class="flex-1 min-w-0">
+<p class="text-sm font-bold text-on-surface truncate">Data Structures L4</p>
+<p class="text-[10px] text-on-surface-variant">15 mins ago</p>
+</div>
+</div>
+<div class="flex items-center gap-4 p-3 hover:bg-surface-container-highest rounded-2xl transition-all cursor-pointer group">
+<div class="w-11 h-11 bg-primary/10 text-primary rounded-xl flex items-center justify-center group-hover:bg-primary/20 transition-colors">
+<span class="material-symbols-outlined">calculate</span>
+</div>
+<div class="flex-1 min-w-0">
+<p class="text-sm font-bold text-on-surface truncate">Linear Algebra Intro</p>
+<p class="text-[10px] text-on-surface-variant">2 hours ago</p>
+</div>
+</div>
+<div class="flex items-center gap-4 p-3 hover:bg-surface-container-highest rounded-2xl transition-all cursor-pointer group">
+<div class="w-11 h-11 bg-tertiary-fixed-dim/10 text-tertiary-fixed-dim rounded-xl flex items-center justify-center group-hover:bg-tertiary-fixed-dim/20 transition-colors">
+<span class="material-symbols-outlined">history_edu</span>
+</div>
+<div class="flex-1 min-w-0">
+<p class="text-sm font-bold text-on-surface truncate">Ethics in AI - Draft</p>
+<p class="text-[10px] text-on-surface-variant">Yesterday</p>
+</div>
+</div>
+</div>
+</section>
+<!-- Teacher’s Remarks -->
+<section class="lg:col-span-3 bg-surface-container-lowest border border-outline-variant/15 rounded-[2rem] p-8 overflow-hidden relative shadow-[0_4px_24px_rgba(50,41,79,0.02)]">
+<div class="absolute -top-10 -right-10 w-32 h-32 bg-secondary/5 rounded-full blur-3xl"></div>
+<div class="flex items-center gap-2 mb-6">
+<span class="material-symbols-outlined text-secondary" style="font-variation-settings: 'FILL' 1;">chat_bubble</span>
+<h3 class="text-lg font-bold text-on-surface">Remarks</h3>
+</div>
+<div class="bg-surface-container-low p-5 rounded-2xl relative z-10 border border-outline-variant/10">
+<p class="text-xs italic text-on-surface leading-relaxed mb-4">"Alex's contribution to the neural networks workshop was exceptional. Their grasp of backpropagation is far ahead of the curve."</p>
+<div class="flex items-center gap-3 border-t border-outline-variant/10 pt-4">
+<img alt="Teacher Avatar" class="w-8 h-8 rounded-lg object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDNCoAj_cnYsyHJ5DbTKj9GDP-smu5b_2THTnVgMnT4GSBtwpKxTYjR_C-S1tUmi8wNh-sUYQyrtLf7Ee5L9phB8FNcwGZtD4xNPSvvPvIfRhYkalyrCesHfL2TH4RNaBBVhGgmeUHImKRyRFO32T2QQ2KVRi-8_2sivvHA8tcD7xj5HSdRUgJfueBPW5GbOkGZjtVTn0wTJiTf6akjD_uIQ1Gzz6mqPgMzr6seDLQVLKQfSTZwQk7F4Q-tbJ-9pYHHKqO7rou9t9Zd"/>
+<div class="min-w-0">
+<p class="text-[10px] font-bold text-on-surface truncate">Dr. Sarah Jenkins</p>
+<p class="text-[9px] text-on-surface-variant truncate">Adv. ML Professor</p>
+</div>
+</div>
+</div>
+</section>
+</div>
+</main>
+<!-- BottomNavBar (Mobile Only) -->
+<nav class="fixed bottom-0 w-full z-50 flex md:hidden justify-around items-center px-4 pb-6 pt-2 bg-background/90 backdrop-blur-lg rounded-t-[2rem] border-t border-outline-variant/15 shadow-[0_-8px_32px_rgba(50,41,79,0.06)]">
+<div class="flex flex-col items-center justify-center bg-secondary-container text-on-secondary-container rounded-2xl px-4 py-2">
+<span class="material-symbols-outlined text-xl" style="font-variation-settings: 'FILL' 1;">dashboard</span>
+<span class="text-[10px] font-bold">Home</span>
+</div>
+<a class="flex flex-col items-center justify-center text-on-surface-variant p-2" href="notes.html">
+<span class="material-symbols-outlined text-xl">description</span>
+<span class="text-[10px] font-semibold">Notes</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant p-2" href="flashcards.html">
+<span class="material-symbols-outlined text-xl">style</span>
+<span class="text-[10px] font-semibold">Cards</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant p-2" href="leaderboard.html">
+<span class="material-symbols-outlined text-xl">leaderboard</span>
+<span class="text-[10px] font-semibold">Rank</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant p-2" href="feedback.html">
+<span class="material-symbols-outlined text-xl">rate_review</span>
+<span class="text-[10px] font-semibold">Feedback</span>
+</a></nav>
+<script>
+    const chatMessages = document.getElementById("chatMessages");
+    const chatInput = document.getElementById("chatInput");
+    const chatSend = document.getElementById("chatSend");
+    const quickPrompts = document.querySelectorAll(".quick-prompt");
+    const API_URL = "http://127.0.0.1:5000/chat";
+
+    function addMessage(message, role) {
+        const messageElement = document.createElement("div");
+        messageElement.className = role === "user"
+            ? "bg-white/20 rounded-2xl p-4 text-sm w-fit max-w-[85%] ml-auto text-right leading-relaxed break-words whitespace-pre-wrap"
+            : "bg-white/10 rounded-2xl p-4 text-sm w-fit max-w-[85%] leading-relaxed break-words whitespace-pre-wrap";
+        messageElement.textContent = message;
+        chatMessages.appendChild(messageElement);
+        requestAnimationFrame(() => {
+            chatMessages.scrollTop = chatMessages.scrollHeight;
+        });
+    }
+
+    async function sendMessage() {
+        const text = chatInput.value.trim();
+        if (!text) return;
+
+        addMessage(text, "user");
+        chatInput.value = "";
+        chatInput.disabled = true;
+        chatSend.disabled = true;
+
+        try {
+            const response = await fetch(API_URL, {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ text })
+            });
+
+            const data = await response.json();
+            if (!response.ok) {
+                throw new Error(data.error || "Failed to fetch chatbot response.");
+            }
+
+            addMessage(data.reply || "No response text received.", "assistant");
+        } catch (error) {
+            addMessage(`Error: ${error.message}`, "assistant");
+        } finally {
+            chatInput.disabled = false;
+            chatSend.disabled = false;
+            chatInput.focus();
+        }
+    }
+
+    chatSend.addEventListener("click", sendMessage);
+    chatInput.addEventListener("keydown", (event) => {
+        if (event.key === "Enter") {
+            event.preventDefault();
+            sendMessage();
+        }
+    });
+
+    quickPrompts.forEach((button) => {
+        button.addEventListener("click", () => {
+            const promptText = button.textContent.trim();
+            chatInput.value = promptText;
+            sendMessage();
+        });
+    });
+</script>
+</body></html>

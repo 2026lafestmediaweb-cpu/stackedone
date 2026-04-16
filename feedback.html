@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html class="light" lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+  <title>Feedback | Ethereal Studio</title>
+  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&amp;family=Plus+Jakarta+Sans:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+  <style>
+    .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; vertical-align: middle; }
+    body { font-family: "Plus Jakarta Sans", sans-serif; }
+    h1, h2, h3, h4 { font-family: "Manrope", sans-serif; }
+  </style>
+</head>
+<body class="bg-[#faf4ff] text-[#32294f] min-h-screen">
+  <header class="fixed top-0 w-full z-50 bg-[#faf4ff]/80 backdrop-blur-xl flex justify-between items-center px-6 h-16">
+    <div class="flex items-center gap-4">
+      <span class="material-symbols-outlined text-[#4a40e0]">menu</span>
+      <span class="text-xl font-extrabold bg-gradient-to-br from-[#4a40e0] to-[#702ae1] bg-clip-text text-transparent tracking-tight">Ethereal Studio</span>
+    </div>
+    <img alt="Student Profile" class="w-10 h-10 rounded-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCxV81jJD5FYurX7f1TvMD8RG2bwxhWtyUu4PJb_rvEOTmHRryGhsgVAkN9PiEnhhXkPqLKrJg1b0q-ydPTcqrpo3O10ClZ_16XsJF1UcoyN0olPiJwE-npPOjkLUFKzAL93CeCCtrBXBfcMHPO1sfmtxPj1rEOOUwu_UGZBuPD5Uq5qxq92QX00s9s7svdf7_gxvlTphs-2o4benzxD_elU_0eSrMOhuR3HKyk-4DiJ1K0KcsnsDSV1uHiQQMWMlRrNsQH0JtbeIRg"/>
+  </header>
+  <div class="flex pt-16 min-h-screen">
+    <aside class="hidden md:flex flex-col w-72 h-[calc(100vh-64px)] p-6 sticky top-16 bg-[#f5eeff] rounded-r-[1.5rem] shadow-2xl z-40">
+      <div class="mb-10 px-2"><h1 class="font-bold text-[#4a40e0] text-2xl tracking-tight">Ethereal Studio</h1></div>
+      <nav class="flex-1 space-y-2">
+        <a class="flex items-center gap-4 px-4 py-3 text-[#5f557f] hover:bg-[#e2d7ff] rounded-full transition-all duration-200" href="index.html"><span class="material-symbols-outlined">dashboard</span><span class="text-sm font-semibold">Dashboard</span></a>
+        <a class="flex items-center gap-4 px-4 py-3 text-[#5f557f] hover:bg-[#e2d7ff] rounded-full transition-all duration-200" href="notes.html"><span class="material-symbols-outlined">description</span><span class="text-sm font-semibold">Notes</span></a>
+        <a class="flex items-center gap-4 px-4 py-3 text-[#5f557f] hover:bg-[#e2d7ff] rounded-full transition-all duration-200" href="flashcards.html"><span class="material-symbols-outlined">style</span><span class="text-sm font-semibold">Flashcards</span></a>
+        <a class="flex items-center gap-4 px-4 py-3 text-[#5f557f] hover:bg-[#e2d7ff] rounded-full transition-all duration-200" href="leaderboard.html"><span class="material-symbols-outlined">leaderboard</span><span class="text-sm font-semibold">Leaderboard</span></a>
+        <a class="flex items-center gap-4 px-4 py-3 bg-[#dcc9ff] text-[#5b00c7] rounded-full transition-all duration-200" href="feedback.html"><span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">rate_review</span><span class="text-sm font-semibold">Feedback</span></a>
+      </nav>
+    </aside>
+    <main class="flex-1 px-4 py-8 md:px-12 max-w-7xl mx-auto pb-24 md:pb-10">
+      <section class="mb-8">
+        <h2 class="text-4xl md:text-5xl font-extrabold tracking-tight mb-2">Feedback</h2>
+        <p class="text-[#5f557f]">Share your learning experience and help improve Ethereal Studio.</p>
+      </section>
+      <section class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+        <div class="lg:col-span-7 bg-white rounded-[1.5rem] p-6 shadow-sm border border-[#b2a6d5]/20">
+          <h3 class="text-lg font-bold mb-4">Send Feedback</h3>
+          <div class="space-y-4">
+            <input class="w-full rounded-xl border-none bg-[#f5eeff] px-4 py-3" placeholder="Subject"/>
+            <textarea class="w-full rounded-xl border-none bg-[#f5eeff] px-4 py-3 min-h-[180px]" placeholder="Tell us what is working, what is confusing, and what you would like next..."></textarea>
+            <div class="flex items-center gap-2 text-sm text-[#5f557f]">
+              <span>Overall experience:</span>
+              <span class="material-symbols-outlined text-[#f59e0b]">star</span>
+              <span class="material-symbols-outlined text-[#f59e0b]">star</span>
+              <span class="material-symbols-outlined text-[#f59e0b]">star</span>
+              <span class="material-symbols-outlined text-[#f59e0b]">star</span>
+              <span class="material-symbols-outlined text-[#d1d5db]">star</span>
+            </div>
+            <button class="bg-[#4a40e0] text-white px-5 py-3 rounded-xl text-sm font-bold hover:bg-[#3d30d4] transition-colors">Submit Feedback</button>
+          </div>
+        </div>
+        <div class="lg:col-span-5 bg-[#f5eeff] rounded-[1.5rem] p-6 shadow-sm">
+          <h3 class="text-lg font-bold mb-4">Recent Responses</h3>
+          <div class="space-y-3">
+            <article class="p-4 bg-white rounded-xl"><p class="text-xs text-[#5f557f] mb-1">Apr 13</p><p class="font-semibold">"The AI assistant hints are super useful before quizzes."</p></article>
+            <article class="p-4 bg-white rounded-xl"><p class="text-xs text-[#5f557f] mb-1">Apr 12</p><p class="font-semibold">"Please add spaced repetition reminders for missed cards."</p></article>
+            <article class="p-4 bg-white rounded-xl"><p class="text-xs text-[#5f557f] mb-1">Apr 10</p><p class="font-semibold">"Would love dark mode sync across all pages."</p></article>
+          </div>
+        </div>
+      </section>
+    </main>
+  </div>
+  <nav class="fixed bottom-0 left-0 w-full flex justify-around items-center px-4 pb-4 pt-2 md:hidden bg-[#faf4ff]/90 backdrop-blur-2xl rounded-t-[1.5rem] shadow-[0_-8px_32px_rgba(50,41,79,0.06)] z-50">
+    <a class="flex flex-col items-center justify-center text-[#5f557f] px-4 py-1 hover:text-[#4a40e0]" href="index.html"><span class="material-symbols-outlined">dashboard</span><span class="text-[11px] font-semibold">Dashboard</span></a>
+    <a class="flex flex-col items-center justify-center text-[#5f557f] px-4 py-1 hover:text-[#4a40e0]" href="notes.html"><span class="material-symbols-outlined">description</span><span class="text-[11px] font-semibold">Notes</span></a>
+    <a class="flex flex-col items-center justify-center text-[#5f557f] px-4 py-1 hover:text-[#4a40e0]" href="flashcards.html"><span class="material-symbols-outlined">style</span><span class="text-[11px] font-semibold">Flashcards</span></a>
+    <a class="flex flex-col items-center justify-center text-[#5f557f] px-4 py-1 hover:text-[#4a40e0]" href="leaderboard.html"><span class="material-symbols-outlined">leaderboard</span><span class="text-[11px] font-semibold">Rank</span></a>
+    <a class="flex flex-col items-center justify-center bg-[#dcc9ff] text-[#5b00c7] rounded-full px-4 py-1 scale-90" href="feedback.html"><span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">rate_review</span><span class="text-[11px] font-semibold">Feedback</span></a>
+  </nav>
+</body>
+</html>

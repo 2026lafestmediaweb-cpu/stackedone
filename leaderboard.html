@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Leaderboard | Ethereal Studio</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&amp;family=Plus+Jakarta+Sans:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "surface-tint": "#4a40e0",
+                        "tertiary-container": "#40bbff",
+                        "on-background": "#32294f",
+                        "surface": "#faf4ff",
+                        "on-tertiary-fixed-variant": "#003d5a",
+                        "error-dim": "#a70138",
+                        "primary": "#4a40e0",
+                        "on-tertiary": "#e9f4ff",
+                        "error": "#b41340",
+                        "on-error-container": "#510017",
+                        "on-surface-variant": "#5f557f",
+                        "surface-variant": "#e2d7ff",
+                        "on-primary-fixed": "#000000",
+                        "on-error": "#ffefef",
+                        "outline": "#7b719c",
+                        "on-primary-fixed-variant": "#1a0099",
+                        "error-container": "#f74b6d",
+                        "secondary-fixed": "#dcc9ff",
+                        "inverse-primary": "#8582ff",
+                        "secondary": "#702ae1",
+                        "inverse-surface": "#10062d",
+                        "primary-container": "#9795ff",
+                        "on-tertiary-fixed": "#001a29",
+                        "tertiary-fixed-dim": "#25adf1",
+                        "on-secondary-fixed-variant": "#6514d6",
+                        "tertiary": "#00628c",
+                        "secondary-dim": "#6411d5",
+                        "on-secondary-container": "#5b00c7",
+                        "on-secondary": "#f8f0ff",
+                        "surface-container-lowest": "#ffffff",
+                        "primary-fixed-dim": "#8885ff",
+                        "on-tertiary-container": "#00344d",
+                        "on-secondary-fixed": "#430097",
+                        "background": "#faf4ff",
+                        "surface-bright": "#faf4ff",
+                        "secondary-container": "#dcc9ff",
+                        "primary-dim": "#3d30d4",
+                        "on-primary-container": "#14007e",
+                        "primary-fixed": "#9795ff",
+                        "on-surface": "#32294f",
+                        "on-primary": "#f4f1ff",
+                        "outline-variant": "#b2a6d5",
+                        "tertiary-fixed": "#40bbff",
+                        "tertiary-dim": "#00557b",
+                        "surface-container-highest": "#e2d7ff",
+                        "inverse-on-surface": "#a296c4",
+                        "surface-dim": "#dacdff",
+                        "secondary-fixed-dim": "#d0b8ff",
+                        "surface-container-low": "#f5eeff",
+                        "surface-container-high": "#e8deff",
+                        "surface-container": "#ede4ff"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "fontFamily": {
+                        "headline": ["Manrope"],
+                        "body": ["Plus Jakarta Sans"],
+                        "label": ["Plus Jakarta Sans"]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        body { font-family: 'Plus Jakarta Sans', sans-serif; }
+        h1, h2, h3 { font-family: 'Manrope', sans-serif; }
+        body {
+            min-height: max(884px, 100dvh);
+        }
+    </style>
+</head>
+<body class="bg-surface text-on-surface min-h-screen">
+<!-- TopAppBar -->
+<header class="fixed top-0 w-full z-50 bg-[#faf4ff]/80 dark:bg-slate-950/80 backdrop-blur-xl flex justify-between items-center px-6 h-16 w-full">
+<div class="flex items-center gap-4">
+<span class="material-symbols-outlined text-[#4a40e0] dark:text-[#702ae1]">menu</span>
+<span class="text-xl font-extrabold bg-gradient-to-br from-[#4a40e0] to-[#702ae1] bg-clip-text text-transparent font-['Manrope'] tracking-tight">Ethereal Studio</span>
+</div>
+<div class="flex items-center gap-4">
+<div class="hidden md:flex gap-6">
+<span class="text-[#5f557f] dark:text-slate-400 font-semibold cursor-pointer hover:bg-[#e2d7ff]/20 px-3 py-1 rounded-full transition-colors">Home</span>
+<span class="text-[#5f557f] dark:text-slate-400 font-semibold cursor-pointer hover:bg-[#e2d7ff]/20 px-3 py-1 rounded-full transition-colors">Notes</span>
+<span class="text-[#4a40e0] font-bold cursor-pointer bg-[#e2d7ff]/20 px-3 py-1 rounded-full transition-colors">Rank</span>
+</div>
+<img alt="Student Profile" class="w-10 h-10 rounded-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCxV81jJD5FYurX7f1TvMD8RG2bwxhWtyUu4PJb_rvEOTmHRryGhsgVAkN9PiEnhhXkPqLKrJg1b0q-ydPTcqrpo3O10ClZ_16XsJF1UcoyN0olPiJwE-npPOjkLUFKzAL93CeCCtrBXBfcMHPO1sfmtxPj1rEOOUwu_UGZBuPD5Uq5qxq92QX00s9s7svdf7_gxvlTphs-2o4benzxD_elU_0eSrMOhuR3HKyk-4DiJ1K0KcsnsDSV1uHiQQMWMlRrNsQH0JtbeIRg"/>
+</div>
+</header>
+<div class="flex pt-16 min-h-screen">
+<!-- NavigationDrawer (Desktop) -->
+<aside class="hidden md:flex flex-col w-72 h-[calc(100vh-64px)] p-6 sticky top-16 bg-[#f5eeff] dark:bg-slate-900 backdrop-blur-md rounded-r-[1.5rem] shadow-2xl dark:shadow-none z-40">
+<div class="mb-10 px-2">
+<h1 class="font-headline font-bold text-primary text-2xl tracking-tight">Ethereal Studio</h1>
+</div><nav class="flex-1 space-y-2"><a class="flex items-center gap-4 px-4 py-3 text-on-surface-variant hover:bg-surface-container-highest rounded-full transition-all duration-200" href="index.html">
+<span class="material-symbols-outlined">dashboard</span>
+<span class="text-sm font-semibold tracking-tight">Dashboard</span>
+</a>
+<a class="flex items-center gap-4 px-4 py-3 text-on-surface-variant hover:bg-surface-container-highest rounded-full transition-all duration-200" href="notes.html">
+<span class="material-symbols-outlined">description</span>
+<span class="text-sm font-semibold tracking-tight">Notes</span>
+</a>
+<a class="flex items-center gap-4 px-4 py-3 text-on-surface-variant hover:bg-surface-container-highest rounded-full transition-all duration-200" href="flashcards.html">
+<span class="material-symbols-outlined">style</span>
+<span class="text-sm font-semibold tracking-tight">Flashcards</span>
+</a>
+<a class="flex items-center gap-4 px-4 py-3 bg-secondary-container text-on-secondary-container rounded-full transition-all duration-200" href="leaderboard.html">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">leaderboard</span>
+<span class="text-sm font-semibold tracking-tight">Leaderboard</span>
+</a>
+<a class="flex items-center gap-4 px-4 py-3 text-on-surface-variant hover:bg-surface-container-highest rounded-full transition-all duration-200" href="feedback.html">
+<span class="material-symbols-outlined">rate_review</span>
+<span class="text-sm font-semibold tracking-tight">Feedback</span>
+</a></nav>
+<div class="mt-auto space-y-4">
+<div class="p-4 bg-primary/10 rounded-2xl">
+<p class="text-[10px] font-bold text-primary mb-1 uppercase tracking-wider">Current Streak</p>
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-secondary" style="font-variation-settings: 'FILL' 1;">local_fire_department</span>
+<span class="text-lg font-bold text-on-surface">12 Days</span>
+</div>
+</div>
+<div class="flex items-center gap-3 p-3 bg-white/50 rounded-2xl border border-outline-variant/10">
+<img alt="Student Profile Picture" class="w-10 h-10 rounded-xl bg-white shadow-sm" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBst-TwNLRytniYjtzexdRJrZJUnq5B4rn9VLgENMFSPYQksY-HrD3hYULcMihqY7ao8hyvDqPzzn9bd68qXrU-yIp69Kdx8viUIrLhWssWYaUWs7FjegGW8unXxFoV-2pqX-mvkK4_kVr6IfmYEhOXVtpgdys1Pwc1XW1gva75hhi38fy8jmd2qlij5kHs68Fz_9TLXGXCo-m7dCf_gRWSa8naDaMRXzLGmUlMKOLwpJR0JXh0AgDd2jRKDdnVAkPWfJLEi4wP9-zX"/>
+<div class="overflow-hidden">
+<p class="text-sm font-bold text-on-surface truncate">Alex Rivers</p>
+<p class="text-[10px] text-on-surface-variant font-medium truncate">Computer Science</p>
+</div>
+<button class="ml-auto text-on-surface-variant hover:text-primary">
+<span class="material-symbols-outlined text-xl">settings</span>
+</button>
+</div>
+</div></aside>
+<!-- Main Content Canvas -->
+<main class="flex-1 px-4 py-8 md:px-12 max-w-6xl mx-auto pb-24 md:pb-12">
+<!-- Header Section -->
+<section class="mb-10 flex flex-col md:flex-row md:items-end justify-between gap-6">
+<div>
+<h1 class="text-4xl md:text-5xl font-extrabold tracking-tight text-on-surface mb-2">Leaderboard</h1>
+<p class="text-on-surface-variant text-lg">Track top performers based on study points</p>
+</div>
+<div class="relative inline-block w-full md:w-auto">
+<select class="w-full md:w-48 bg-surface-container-high border-none rounded-xl px-4 py-3 text-on-surface font-semibold focus:ring-2 focus:ring-primary/30 appearance-none">
+<option>This Week</option>
+<option>This Month</option>
+<option selected="">All Time</option>
+</select>
+<span class="material-symbols-outlined absolute right-4 top-3 pointer-events-none text-on-surface-variant">expand_more</span>
+</div>
+</section>
+<!-- Podium Section -->
+<section class="grid grid-cols-1 md:grid-cols-3 items-end gap-6 md:gap-0 mb-16 px-4">
+<!-- 2nd Place -->
+<div class="order-2 md:order-1 flex flex-col items-center">
+<div class="relative group mb-4">
+<div class="absolute -inset-2 bg-slate-300 blur-lg opacity-30 rounded-full group-hover:opacity-50 transition-opacity"></div>
+<img alt="Sarah Chen" class="w-24 h-24 md:w-28 md:h-28 rounded-full relative z-10 border-4 border-slate-200 object-cover shadow-xl" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBcxq3-raFXKsg1qbBEx3vR62EAjL7a_kJqYOEx1L3Po67xS2usdnYRU5qqhGNU7-1PE5_JzSYBwPZ3d9zJNsav62zlclar-0K9DwmfAWgOL2UikaIYJijLUsE3bs1a20cahpKXca_Q1iHir7YJvYBaAj5F2B0xOmPE16RNEEkAXiKyzNn04KAz0XB3y9hmwJuDl46SMmrwAlV6Y-ajGxzu5oCuvx77PlSXUINHy6Piq-va_X5kjZNEyVuI6Q6u1oZsgdAHElaRIiea"/>
+<div class="absolute -bottom-2 left-1/2 -translate-x-1/2 z-20 bg-slate-200 text-slate-700 font-bold px-3 py-1 rounded-full text-sm shadow-md">2nd</div>
+</div>
+<div class="text-center">
+<h3 class="text-xl font-bold text-on-surface">Sarah Chen</h3>
+<p class="text-[#702ae1] font-extrabold text-lg tracking-tight">12,450 pts</p>
+</div>
+<div class="hidden md:block w-full h-32 bg-surface-container-low rounded-t-3xl mt-6 shadow-inner border-t border-white/50"></div>
+</div>
+<!-- 1st Place -->
+<div class="order-1 md:order-2 flex flex-col items-center transform md:-translate-y-8">
+<div class="relative group mb-4">
+<div class="absolute -inset-6 bg-yellow-400 blur-2xl opacity-40 rounded-full animate-pulse"></div>
+<img alt="Marcus Vanh" class="w-32 h-32 md:w-40 md:h-40 rounded-full relative z-10 border-4 border-yellow-400 object-cover shadow-2xl" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAde1y72okfCItSdF4ANPp7Jk1hZkqiID_VrYi7Don_t0AmvXA7bZ6FExA4pe1e7emr6jrjWn9D3qX3wtYX_Ws1XszKx8osYAgy4ICgmbCOwXRMEttoQ0Qo5bRhqNBUIYW27CKOIKOAPpBr443OFjVxNgkTsO5YUPYnLJyw7DLywGxCzK1bycEacV-F8UNQ5D6Rxt26HoLsy5kZy3dly1Yc-va4NCg0tKV0fHKG_rO8CXzuR1owBezjN_iJFDxdBOWYP2iRAzA_WDvc"/>
+<div class="absolute -bottom-3 left-1/2 -translate-x-1/2 z-20 bg-yellow-400 text-yellow-900 font-black px-5 py-1.5 rounded-full text-base shadow-lg ring-4 ring-surface">1st</div>
+</div>
+<div class="text-center">
+<h3 class="text-2xl font-black text-on-surface">Marcus Vanh</h3>
+<p class="bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent font-black text-2xl tracking-tighter">15,890 pts</p>
+</div>
+<div class="hidden md:block w-full h-48 bg-surface-container-high rounded-t-3xl mt-6 shadow-xl border-t border-white/60 relative overflow-hidden">
+<div class="absolute inset-0 bg-gradient-to-b from-primary/5 to-transparent"></div>
+</div>
+</div>
+<!-- 3rd Place -->
+<div class="order-3 md:order-3 flex flex-col items-center">
+<div class="relative group mb-4">
+<div class="absolute -inset-2 bg-orange-300 blur-lg opacity-20 rounded-full"></div>
+<img alt="Elena Rodriguez" class="w-24 h-24 md:w-28 md:h-28 rounded-full relative z-10 border-4 border-orange-200 object-cover shadow-lg" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBEQL6YJVEELPrfLQVea1e8U0lUzoe65E0GLn7Ux4kZiO5uF34P0PdDzCLAbnaGK031_xez4IIDNSGY3VpoOhz2b2XF2N3txo3V6P288Ss3GEg6uI3a6dLF347gieD659lVDk5mhv17fy3rlq_gdTC5H71niWckL341eX2ERk4ihKH8qkbaWSDNATcz9e74FrfCc5JatLVD1n6pu7TMMvoq-Y7xfmNb8dZ1KwpBoNCeEU1Iko0Ty0xo5g2b8qsgacjrARtDYGHojgSj"/>
+<div class="absolute -bottom-2 left-1/2 -translate-x-1/2 z-20 bg-orange-300 text-orange-900 font-bold px-3 py-1 rounded-full text-sm shadow-md">3rd</div>
+</div>
+<div class="text-center">
+<h3 class="text-xl font-bold text-on-surface">Elena Rodriguez</h3>
+<p class="text-[#702ae1] font-extrabold text-lg tracking-tight">10,120 pts</p>
+</div>
+<div class="hidden md:block w-full h-24 bg-surface-container-low rounded-t-3xl mt-6 shadow-inner border-t border-white/50"></div>
+</div>
+</section>
+<!-- Ranking List -->
+<section class="space-y-3">
+<div class="bg-surface-container-lowest rounded-3xl p-6 shadow-sm">
+<div class="hidden md:grid grid-cols-12 gap-4 px-4 mb-4 text-on-surface-variant text-xs font-bold uppercase tracking-widest">
+<div class="col-span-1">Rank</div>
+<div class="col-span-5">Student</div>
+<div class="col-span-2">Points</div>
+<div class="col-span-1">Trend</div>
+<div class="col-span-3 text-right">Achievements</div>
+</div>
+<div class="space-y-2">
+<!-- Student Item 4 -->
+<div class="grid grid-cols-5 md:grid-cols-12 gap-4 items-center p-4 rounded-2xl hover:bg-surface-container-low transition-all group cursor-default">
+<div class="col-span-1 text-lg font-black text-on-surface-variant/50">04</div>
+<div class="col-span-3 md:col-span-5 flex items-center gap-3">
+<img alt="Jordan Smith" class="w-10 h-10 rounded-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAz2qMA9GG6LChRph2XuneIzsj9kT5IlmmlJPmveH1CYddkw52vc1WMLmV28amXFPBqshl1MxxP4GrbWxtgi0iCUrZBX50mKMYBv2UlqB95ZpnXgpoTzzn4O1p4JndBiSU64CmuYGCaohriqqRI335bitVAJfaaQTB6oIHM1GKt5olDNoTgp0LHEgSHK_v5R2ar0LK_WATTfk03skX9pCN6Uet0xRLA3guEllniTsm3bmpRufmBjUbOz670cSXzhOy5e2uIFriraTyW"/>
+<div>
+<p class="font-bold text-on-surface text-sm md:text-base">Jordan Smith</p>
+<p class="text-xs text-on-surface-variant md:hidden">8,940 pts</p>
+</div>
+</div>
+<div class="hidden md:col-span-2 font-bold text-on-surface">8,940</div>
+<div class="hidden md:col-span-1 text-green-500 flex items-center gap-1">
+<span class="material-symbols-outlined text-sm font-bold">arrow_upward</span>
+<span class="text-xs font-bold">2</span>
+</div>
+<div class="col-span-1 md:col-span-3 flex justify-end gap-2">
+<span class="material-symbols-outlined text-orange-500 text-xl" style="font-variation-settings: 'FILL' 1;">local_fire_department</span>
+<span class="material-symbols-outlined text-primary text-xl" style="font-variation-settings: 'FILL' 1;">psychology</span>
+</div>
+</div>
+<!-- Student Item 5 -->
+<div class="grid grid-cols-5 md:grid-cols-12 gap-4 items-center p-4 rounded-2xl hover:bg-surface-container-low transition-all group cursor-default">
+<div class="col-span-1 text-lg font-black text-on-surface-variant/50">05</div>
+<div class="col-span-3 md:col-span-5 flex items-center gap-3">
+<img alt="Liam O'Brian" class="w-10 h-10 rounded-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCI3SBagxEiw9Jrmel2ohNne4EXgaH4sdTEwyn3_b1FEDXX0ifNAf3CffycfkMs8k0e9fMGp_UM6g3AYvIqQxKBjrHBIxx_LHBAykO-_uCmAIYSF8ofHtimqEubwwl3o2Gjk6UZxLPIvSkVHvdiDvV1c3WQGluWcO_Ks8AdR4uSBexMocj-IMUcSML9xsqHdPJReCWAGcww4HSC5eK7ahGoqteCBIOHrhyLhGjTt6VG4ZH83XPCdJ2mfiBEydMK8a-VNN5fmCS1Rujy"/>
+<div>
+<p class="font-bold text-on-surface text-sm md:text-base">Liam O'Brian</p>
+<p class="text-xs text-on-surface-variant md:hidden">8,210 pts</p>
+</div>
+</div>
+<div class="hidden md:col-span-2 font-bold text-on-surface">8,210</div>
+<div class="hidden md:col-span-1 text-on-surface-variant/40 flex items-center gap-1">
+<span class="material-symbols-outlined text-sm">remove</span>
+</div>
+<div class="col-span-1 md:col-span-3 flex justify-end gap-2">
+<span class="material-symbols-outlined text-orange-500 text-xl" style="font-variation-settings: 'FILL' 1;">local_fire_department</span>
+</div>
+</div>
+<!-- Student Item 6 -->
+<div class="grid grid-cols-5 md:grid-cols-12 gap-4 items-center p-4 rounded-2xl hover:bg-surface-container-low transition-all group cursor-default">
+<div class="col-span-1 text-lg font-black text-on-surface-variant/50">06</div>
+<div class="col-span-3 md:col-span-5 flex items-center gap-3">
+<img alt="Maya Patil" class="w-10 h-10 rounded-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDLcVIIvMohNgwi2jeINvh2k2YB65cZjprloruCQH7l_Ha6RjWdCREWoscVEZ48b_QJwCJ2YGsHMXSOXq1UrazjDQY9IZiNDYD-kasVfUq7CQh_wCc9_yvaqNU5J5HTwkwvhYTAdzSFZX6SNmZaQothJVbM14rph-KPf4vt1gmwrxsIsORiEJk6SQ4V4fXl_dbrvI6j1UI00iZ-LDE9ysNAdCwZBEDCGX5jy9pMtdXPIAW6FZsaYkpv-vUJwyHEcE4GNFaVNfNgguI_"/>
+<div>
+<p class="font-bold text-on-surface text-sm md:text-base">Maya Patil</p>
+<p class="text-xs text-on-surface-variant md:hidden">7,850 pts</p>
+</div>
+</div>
+<div class="hidden md:col-span-2 font-bold text-on-surface">7,850</div>
+<div class="hidden md:col-span-1 text-red-500 flex items-center gap-1">
+<span class="material-symbols-outlined text-sm font-bold">arrow_downward</span>
+<span class="text-xs font-bold">1</span>
+</div>
+<div class="col-span-1 md:col-span-3 flex justify-end gap-2">
+<span class="material-symbols-outlined text-primary text-xl" style="font-variation-settings: 'FILL' 1;">psychology</span>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Points System Indicator Card -->
+<section class="mt-16">
+<div class="bg-gradient-to-br from-primary to-secondary p-8 rounded-[2rem] text-on-primary shadow-2xl relative overflow-hidden">
+<div class="absolute top-0 right-0 p-12 opacity-10 transform translate-x-10 -translate-y-10">
+<span class="material-symbols-outlined text-[120px]">stars</span>
+</div>
+<h2 class="text-3xl font-black mb-6 relative z-10">Master the System</h2>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-8 relative z-10">
+<div class="flex items-start gap-4">
+<div class="bg-white/20 p-3 rounded-2xl backdrop-blur-md">
+<span class="material-symbols-outlined text-2xl">timer</span>
+</div>
+<div>
+<h4 class="font-bold text-lg">Focus Sessions</h4>
+<p class="text-sm opacity-80">Earn 10 points for every 25 minutes of deep focus study.</p>
+</div>
+</div>
+<div class="flex items-start gap-4">
+<div class="bg-white/20 p-3 rounded-2xl backdrop-blur-md">
+<span class="material-symbols-outlined text-2xl">style</span>
+</div>
+<div>
+<h4 class="font-bold text-lg">Card Mastery</h4>
+<p class="text-sm opacity-80">Gain 5 points for each perfect flashcard session completion.</p>
+</div>
+</div>
+<div class="flex items-start gap-4">
+<div class="bg-white/20 p-3 rounded-2xl backdrop-blur-md">
+<span class="material-symbols-outlined text-2xl">rocket_launch</span>
+</div>
+<div>
+<h4 class="font-bold text-lg">Daily Streak</h4>
+<p class="text-sm opacity-80">Maintain a 7-day streak for a 500 point bonus multiplier.</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+</main>
+</div>
+<!-- BottomNavBar (Mobile Only) -->
+<nav class="fixed bottom-0 left-0 w-full flex justify-around items-center px-4 pb-4 pt-2 md:hidden bg-[#faf4ff]/90 dark:bg-slate-950/90 backdrop-blur-2xl rounded-t-[1.5rem] shadow-[0_-8px_32px_rgba(50,41,79,0.06)] z-50">
+<a class="flex flex-col items-center justify-center text-[#5f557f] dark:text-slate-400 px-4 py-1 hover:text-[#4a40e0] transition-all" href="index.html">
+<span class="material-symbols-outlined">dashboard</span>
+<span class="font-['Plus_Jakarta_Sans'] text-[11px] font-semibold">Dashboard</span>
+</a>
+<a class="flex flex-col items-center justify-center text-[#5f557f] dark:text-slate-400 px-4 py-1 hover:text-[#4a40e0] transition-all" href="notes.html">
+<span class="material-symbols-outlined">description</span>
+<span class="font-['Plus_Jakarta_Sans'] text-[11px] font-semibold">Notes</span>
+</a>
+<a class="flex flex-col items-center justify-center text-[#5f557f] dark:text-slate-400 px-4 py-1 hover:text-[#4a40e0] transition-all" href="flashcards.html">
+<span class="material-symbols-outlined">style</span>
+<span class="font-['Plus_Jakarta_Sans'] text-[11px] font-semibold">Flashcards</span>
+</a>
+<div class="flex flex-col items-center justify-center bg-[#dcc9ff] dark:bg-[#702ae1]/30 text-[#5b00c7] dark:text-[#e2d7ff] rounded-full px-4 py-1 scale-90">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">leaderboard</span>
+<span class="font-['Plus_Jakarta_Sans'] text-[11px] font-semibold">Rank</span>
+</div>
+<a class="flex flex-col items-center justify-center text-[#5f557f] dark:text-slate-400 px-4 py-1 hover:text-[#4a40e0] transition-all" href="feedback.html">
+<span class="material-symbols-outlined">rate_review</span>
+<span class="font-['Plus_Jakarta_Sans'] text-[11px] font-semibold">Feedback</span>
+</a>
+</nav>
+</body></html>
