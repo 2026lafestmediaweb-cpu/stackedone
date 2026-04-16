@@ -163,7 +163,10 @@
 <!-- Header Section -->
 <header class="mb-8">
 <h2 class="text-3xl font-extrabold text-on-surface mb-2">Good morning, Alex.</h2>
-<p class="text-on-surface-variant font-medium text-base">You have <span class="text-primary font-bold">3 assignments</span> due this week. Stay focused.</p>
+<p class="text-on-surface-variant font-medium text-base">
+    You have <span class="text-primary font-bold">3 assignments</span> due this week. 
+    Status: <span id="output" class="text-secondary font-bold">Connecting...</span>
+</p>
 </header>
 <!-- Dashboard Grid -->
 <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
@@ -403,11 +406,11 @@
     const chatInput = document.getElementById("chatInput");
     const chatSend = document.getElementById("chatSend");
     const quickPrompts = document.querySelectorAll(".quick-prompt");
-    const API_URL = "https://your-flask-app.up.railway.app";
+    const API_URL = "https://web-production-d1f9.up.railway.app";
 
 async function getData() {
     try {
-        const response = await fetch(`${API_URL}/api/data`);
+        const response = await fetch(`${API_URL}/chat`, { ... });
         const data = await response.json();
         
         // Inject the data into your HTML
