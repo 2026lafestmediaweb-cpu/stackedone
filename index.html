@@ -9,151 +9,218 @@
     <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet"/>
     <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
     <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-    <script>
+    <script id="tailwind-config">
         tailwind.config = {
+            darkMode: "class",
             theme: {
                 extend: {
-                    colors: {
+                    "colors": {
+                        "on-surface-variant": "#5f557f",
                         "primary": "#4a40e0",
                         "secondary": "#702ae1",
-                        "surface-container": "#ede4ff",
-                        "on-surface": "#32294f",
-                        "on-surface-variant": "#5f557f",
+                        "surface-container-low": "#f5eeff",
+                        "surface-container-lowest": "#ffffff",
+                        "on-background": "#32294f",
+                        "background": "#faf4ff",
+                        "outline-variant": "#b2a6d5"
+                    },
+                    "fontFamily": {
+                        "headline": ["Manrope"],
+                        "body": ["Plus Jakarta Sans"]
                     }
-                }
-            }
+                },
+            },
         }
     </script>
     <style>
         .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; vertical-align: middle; }
         body { font-family: 'Plus Jakarta Sans', sans-serif; }
+        h1, h2, h3 { font-family: 'Manrope', sans-serif; }
         .scrollbar-hide::-webkit-scrollbar { display: none; }
+        .chart-tooltip { visibility: hidden; position: absolute; z-index: 10; }
+        .bar-container:hover .chart-tooltip { visibility: visible; }
     </style>
 </head>
-<body class="bg-[#faf4ff] text-[#32294f] min-h-screen">
+<body class="bg-background text-on-background min-h-screen">
 
-    <aside class="hidden md:flex flex-col w-72 h-screen p-6 fixed left-0 top-0 bg-[#f5eeff] z-50">
-        <h1 class="font-bold text-primary text-2xl mb-10">Ethereal Studio</h1>
-        <nav class="space-y-2">
-            <a class="flex items-center gap-4 px-4 py-3 bg-primary text-white rounded-full" href="#">
-                <span class="material-symbols-outlined">dashboard</span>
-                <span class="text-sm font-semibold">Dashboard</span>
-            </a>
-        </nav>
-    </aside>
-
-    <main class="md:ml-72 p-6 md:p-10">
-        <header class="mb-8">
-            <h2 class="text-3xl font-extrabold mb-2">Good morning, Alex.</h2>
-            <p class="text-on-surface-variant font-medium">
-                Status: <span id="output" class="text-secondary font-bold">Connecting...</span>
-            </p>
-        </header>
-
-        <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
-            <section class="lg:col-span-5 bg-primary rounded-[2rem] p-6 text-white shadow-xl flex flex-col h-[600px]">
-                <div class="flex items-center gap-3 mb-6">
-                    <span class="material-symbols-outlined bg-white/20 p-2 rounded-xl">smart_toy</span>
-                    <div>
-                        <h3 class="font-bold">Academic Assistant</h3>
-                        <p class="text-xs text-white/70">Powered by Gemini AI</p>
-                    </div>
-                </div>
-
-                <div id="chatMessages" class="flex-1 space-y-4 mb-4 overflow-y-auto scrollbar-hide pr-2">
-                    <div class="bg-white/10 rounded-2xl p-4 text-sm w-fit max-w-[85%]">
-                        How can I help with your studies today?
-                    </div>
-                </div>
-
-                <div class="space-y-4">
-                    <div class="flex gap-2">
-                        <button class="quick-prompt bg-white/10 px-3 py-1 rounded-full text-xs">Explain DNA</button>
-                        <button class="quick-prompt bg-white/10 px-3 py-1 rounded-full text-xs">Python Quiz</button>
-                    </div>
-                    <div class="relative">
-                        <input id="chatInput" class="w-full bg-white/10 border-none rounded-2xl py-4 px-5 text-sm placeholder:text-white/50 focus:ring-2 focus:ring-white/30" placeholder="Ask anything..."/>
-                        <button id="chatSend" class="absolute right-2 top-2 p-2 bg-white text-primary rounded-xl hover:bg-gray-100">
-                            <span class="material-symbols-outlined">send</span>
-                        </button>
-                    </div>
-                </div>
-            </section>
+<aside class="hidden md:flex flex-col w-72 h-screen p-6 fixed left-0 top-0 bg-surface-container-low shadow-[8px_0_32px_rgba(50,41,79,0.06)] rounded-r-[2rem] z-50">
+    <div class="mb-10 px-2">
+        <h1 class="font-headline font-bold text-primary text-2xl tracking-tight">Ethereal Studio</h1>
+    </div>
+    <nav class="flex-1 space-y-2">
+        <a class="flex items-center gap-4 px-4 py-3 bg-[#dcc9ff] text-[#5b00c7] rounded-full transition-all" href="#">
+            <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">dashboard</span>
+            <span class="text-sm font-semibold">Dashboard</span>
+        </a>
+        <a class="flex items-center gap-4 px-4 py-3 text-on-surface-variant hover:bg-white/50 rounded-full" href="#">
+            <span class="material-symbols-outlined">description</span>
+            <span class="text-sm font-semibold">Notes</span>
+        </a>
+    </nav>
+    <div class="mt-auto space-y-4">
+        <div class="p-4 bg-primary/10 rounded-2xl">
+            <p class="text-[10px] font-bold text-primary mb-1 uppercase">Current Streak</p>
+            <div class="flex items-center gap-2">
+                <span class="material-symbols-outlined text-secondary" style="font-variation-settings: 'FILL' 1;">local_fire_department</span>
+                <span class="text-lg font-bold text-on-surface">12 Days</span>
+            </div>
         </div>
-    </main>
+    </div>
+</aside>
 
-    <script>
-        const chatMessages = document.getElementById("chatMessages");
-        const chatInput = document.getElementById("chatInput");
-        const chatSend = document.getElementById("chatSend");
-        const statusOutput = document.getElementById("output");
+<main class="md:ml-72 p-6 md:p-10 pb-32">
+    <header class="mb-8">
+        <h2 class="text-3xl font-extrabold text-on-surface mb-2">Good morning, Alex.</h2>
+        <p class="text-on-surface-variant font-medium text-base">
+            You have <span class="text-primary font-bold">3 assignments</span> due this week. 
+            Status: <span id="output" class="text-secondary font-bold">Connecting...</span>
+        </p>
+    </header>
+
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+        <section class="lg:col-span-8 bg-surface-container-lowest rounded-[2rem] p-8 shadow-[0_8px_32px_rgba(50,41,79,0.04)]">
+            <h3 class="text-xl font-bold text-on-surface mb-8">Performance Graph</h3>
+            <div class="relative h-64 w-full flex items-end justify-around px-2">
+                <div class="bar-container relative w-8 h-[60%] bg-primary rounded-t-full group">
+                    <div class="chart-tooltip bottom-full mb-2 bg-black text-white text-[10px] py-1 px-2 rounded">Math: 60%</div>
+                </div>
+                <div class="bar-container relative w-8 h-[85%] bg-secondary rounded-t-full group">
+                    <div class="chart-tooltip bottom-full mb-2 bg-black text-white text-[10px] py-1 px-2 rounded">Science: 85%</div>
+                </div>
+                <div class="bar-container relative w-8 h-[70%] bg-[#40bbff] rounded-t-full group">
+                    <div class="chart-tooltip bottom-full mb-2 bg-black text-white text-[10px] py-1 px-2 rounded">English: 70%</div>
+                </div>
+            </div>
+        </section>
+
+        <section class="lg:col-span-4 bg-primary rounded-[2rem] p-6 text-white shadow-xl flex flex-col h-[500px]">
+            <div class="flex items-center gap-3 mb-6">
+                <span class="material-symbols-outlined bg-white/20 p-2 rounded-xl" style="font-variation-settings: 'FILL' 1;">smart_toy</span>
+                <div>
+                    <h3 class="font-headline font-bold">Academic Assistant</h3>
+                    <p class="text-[10px] text-white/70">Powered by Ethereal AI</p>
+                </div>
+            </div>
+            
+            <div class="flex-1 space-y-4 mb-4 overflow-y-auto scrollbar-hide pr-1" id="chatMessages">
+                <div class="bg-white/10 rounded-2xl p-4 text-sm w-fit max-w-[85%]">
+                    How can I help with your Computer Science revision today?
+                </div>
+            </div>
+
+            <div class="space-y-4">
+                <div class="flex flex-wrap gap-2 mb-2">
+                    <button class="quick-prompt bg-white/15 hover:bg-white/25 px-3 py-1.5 rounded-full text-[10px] font-bold border border-white/10">Explain topic</button>
+                    <button class="quick-prompt bg-white/15 hover:bg-white/25 px-3 py-1.5 rounded-full text-[10px] font-bold border border-white/10">Give quiz</button>
+                </div>
+                <div class="relative">
+                    <input class="w-full bg-white/10 border-none rounded-2xl py-4 px-5 text-sm placeholder:text-white/50 focus:ring-2 focus:ring-white/30" id="chatInput" placeholder="Ask anything..." type="text"/>
+                    <button class="absolute right-2 top-2 p-2 bg-white text-primary rounded-xl hover:bg-white/90" id="chatSend">
+                        <span class="material-symbols-outlined">send</span>
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <section class="lg:col-span-6 bg-surface-container-low rounded-[2rem] p-8">
+            <h3 class="text-lg font-bold text-on-surface mb-6">Announcements</h3>
+            <div class="space-y-4">
+                <div class="p-5 bg-white rounded-2xl border border-primary/5">
+                    <h4 class="font-bold text-sm">Spring Term Break</h4>
+                    <p class="text-xs text-on-surface-variant">The university will be closed from March 15th to 22nd.</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="lg:col-span-6 bg-surface-container-lowest border border-outline-variant/15 rounded-[2rem] p-8">
+            <h3 class="text-lg font-bold text-on-surface mb-6">Remarks</h3>
+            <div class="bg-surface-container-low p-5 rounded-2xl">
+                <p class="text-xs italic text-on-surface">"Alex's grasp of backpropagation is far ahead of the curve."</p>
+                <p class="text-[10px] font-bold mt-4 text-on-surface">Dr. Sarah Jenkins</p>
+            </div>
+        </section>
+    </div>
+</main>
+
+<script>
+    const chatMessages = document.getElementById("chatMessages");
+    const chatInput = document.getElementById("chatInput");
+    const chatSend = document.getElementById("chatSend");
+    const outputStatus = document.getElementById("output");
+    
+    // REPLACE THIS with your actual Railway URL
+    const API_URL = "https://web-production-d1f9.up.railway.app";
+
+    // 1. Connection Status Check
+    async function checkBackend() {
+        try {
+            const res = await fetch(`${API_URL}/api/data`);
+            const data = await res.json();
+            outputStatus.innerText = data.message;
+        } catch (e) {
+            outputStatus.innerText = "Offline";
+        }
+    }
+    checkBackend();
+
+    // 2. Add Message to UI
+    function addMessage(text, role) {
+        const msgDiv = document.createElement("div");
+        msgDiv.className = role === "user"
+            ? "bg-white/20 rounded-2xl p-4 text-sm w-fit max-w-[85%] ml-auto text-right leading-relaxed"
+            : "bg-white/10 rounded-2xl p-4 text-sm w-fit max-w-[85%] leading-relaxed";
+        msgDiv.innerText = text;
+        chatMessages.appendChild(msgDiv);
+        chatMessages.scrollTop = chatMessages.scrollHeight;
+    }
+
+    // 3. Send Message Function
+    async function sendMessage() {
+        const text = chatInput.value.trim();
+        if (!text) return;
+
+        addMessage(text, "user");
+        chatInput.value = "";
         
-        // REPLACE WITH YOUR ACTUAL RAILWAY URL
-        const API_URL = "https://web-production-d1f9.up.railway.app";
+        // Disable UI while thinking
+        chatInput.disabled = true;
+        chatSend.disabled = true;
+        chatSend.style.opacity = "0.5";
 
-        // Check Connection
-        async function checkConnection() {
-            try {
-                const res = await fetch(`${API_URL}/api/data`);
-                const data = await res.json();
-                statusOutput.innerText = data.message || "Online";
-            } catch (e) {
-                statusOutput.innerText = "Offline";
-            }
-        }
-        checkConnection();
-
-        function addMessage(text, role) {
-            const div = document.createElement("div");
-            div.className = role === "user" 
-                ? "bg-white/20 rounded-2xl p-4 text-sm w-fit max-w-[85%] ml-auto text-right" 
-                : "bg-white/10 rounded-2xl p-4 text-sm w-fit max-w-[85%]";
-            div.innerText = text;
-            chatMessages.appendChild(div);
-            chatMessages.scrollTop = chatMessages.scrollHeight;
-        }
-
-        async function sendMessage() {
-            const text = chatInput.value.trim();
-            if (!text) return;
-
-            addMessage(text, "user");
-            chatInput.value = "";
-            chatInput.disabled = true;
-            chatSend.disabled = true;
-
-            try {
-                const response = await fetch(`${API_URL}/chat`, {
-                    method: "POST",
-                    headers: { "Content-Type": "application/json" },
-                    body: JSON.stringify({ text: text })
-                });
-
-                const data = await response.json();
-                if (data.reply) {
-                    addMessage(data.reply, "assistant");
-                } else {
-                    addMessage("Error: " + (data.error || "Unknown error"), "assistant");
-                }
-            } catch (e) {
-                addMessage("Could not connect to server.", "assistant");
-            } finally {
-                // This re-enables the input so you can send more than one message
-                chatInput.disabled = false;
-                chatSend.disabled = false;
-                chatInput.focus();
-            }
-        }
-
-        chatSend.addEventListener("click", sendMessage);
-        chatInput.addEventListener("keypress", (e) => { if(e.key === "Enter") sendMessage(); });
-        
-        document.querySelectorAll(".quick-prompt").forEach(btn => {
-            btn.addEventListener("click", () => {
-                chatInput.value = btn.innerText;
-                sendMessage();
+        try {
+            const response = await fetch(`${API_URL}/chat`, {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ text: text })
             });
+
+            const data = await response.json();
+            if (data.reply) {
+                addMessage(data.reply, "assistant");
+            } else {
+                addMessage("Error: " + (data.error || "Something went wrong"), "assistant");
+            }
+        } catch (error) {
+            addMessage("Error: Could not connect to Railway.", "assistant");
+        } finally {
+            // CRITICAL: This re-enables the UI so you can send another prompt!
+            chatInput.disabled = false;
+            chatSend.disabled = false;
+            chatSend.style.opacity = "1";
+            chatInput.focus();
+        }
+    }
+
+    // Event Listeners
+    chatSend.addEventListener("click", sendMessage);
+    chatInput.addEventListener("keydown", (e) => { if (e.key === "Enter") sendMessage(); });
+    
+    document.querySelectorAll(".quick-prompt").forEach(btn => {
+        btn.addEventListener("click", () => {
+            chatInput.value = btn.innerText;
+            sendMessage();
         });
-    </script>
+    });
+</script>
 </body>
 </html>
