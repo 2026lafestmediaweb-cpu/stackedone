@@ -410,7 +410,8 @@
 
 async function getData() {
     try {
-        const response = await fetch(`${API_URL}/chat`, { ... });
+        // Change this line in your HTML script:
+const response = await fetch(`${API_URL}/chat`, { ... });
         const data = await response.json();
         
         // Inject the data into your HTML
